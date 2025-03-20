@@ -1,0 +1,35 @@
+@startuml
+class Juego{
+ + revisarJugada (jugada1, jugada2): String
+}
+
+interface Jugada{
+ + ganaA(jugada): boolean
+}
+
+class Piedra{
+ + ganaA(jugada): boolean
+}
+
+class Papel{
+ + ganaA(jugada): boolean
+}
+
+class Tijera{
+ + ganaA(jugada): boolean
+}
+
+class Lagarto{
+ + ganaA(jugada): boolean
+}
+
+class Spock{
+ + ganaA(jugada): boolean
+}
+
+Piedra ..|> Jugada
+Tijera ..|> Jugada
+Papel ..|> Jugada
+Lagarto ..|> Jugada
+Spock ..|> Jugada
+@enduml
