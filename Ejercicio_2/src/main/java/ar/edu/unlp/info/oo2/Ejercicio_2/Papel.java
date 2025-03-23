@@ -2,12 +2,28 @@ package ar.edu.unlp.info.oo2.Ejercicio_2;
 
 public class Papel implements Jugada {
 
-	public boolean ganaA(Jugada ju) {
-		if((ju instanceof Piedra) || (ju instanceof Spock)) {
-			return true;
-		}
-		else
-			return false;
+	public String Juego(Jugada jugada) {
+		return jugada.ContraPapel();
+	}
+
+	public String ContraPiedra() {
+		return "Gana papel";
+	}
+
+	public String ContraPapel() {
+		return "Empate";
+	}
+
+	public String ContraTijera() {
+		return "Gana tijera";
+	}
+
+	public String ContraLagarto() {
+		return "Gana lagarto";
+	}
+
+	public String ContraSpock() {
+		return "Gana papel";
 	}
 
 }

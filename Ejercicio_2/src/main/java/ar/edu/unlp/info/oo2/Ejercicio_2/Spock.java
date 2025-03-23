@@ -2,11 +2,27 @@ package ar.edu.unlp.info.oo2.Ejercicio_2;
 
 public class Spock implements Jugada{
 	
-	public boolean ganaA(Jugada ju) {
-		if((ju instanceof Tijera) || (ju instanceof Piedra)) {
-			return true;
-		}
-		else
-			return false;
+	public String Juego(Jugada jugada) {
+		return jugada.ContraSpock();
+	}
+
+	public String ContraPiedra() {
+		return "Gana Spock";
+	}
+
+	public String ContraPapel() {
+		return "Gana papel";
+	}
+
+	public String ContraTijera() {
+		return "Gana Spock";
+	}
+
+	public String ContraLagarto() {
+		return "Gana lagarto";
+	}
+
+	public String ContraSpock() {
+		return "Empate";
 	}
 }
