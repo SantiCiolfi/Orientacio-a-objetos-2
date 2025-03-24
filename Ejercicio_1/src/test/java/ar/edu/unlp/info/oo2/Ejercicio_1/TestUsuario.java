@@ -16,6 +16,7 @@ class TestUsuario {
 	@BeforeEach
 	void setUp() {
 		usu1 = new Usuario("pepito");
+
 		t1 = new Tweet();
 		t2 = new Tweet();
 		t3 = new Tweet();
@@ -24,16 +25,11 @@ class TestUsuario {
 	
 	@Test
 	void testTweetear() {
-		usu1.Tweetear("esto es un tweet escrito 1");
-		usu1.Tweetear("esto es un tweet escrito 2");
-		usu1.Tweetear("esto es un tweet escrito 3");
+		usu1.tweetear("esto es un tweet escrito 1");
+		usu1.tweetear("esto es un tweet escrito 2");
+		usu1.tweetear("esto es un tweet escrito 3");
 		
-		assertEquals(usu1.getTweets().size(), 3);
-		
-		usu1.Tweetear("");
-		usu1.Tweetear("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.");
-		
-		assertEquals(usu1.getTweets().size(), 3);
+		assertEquals(usu1.getPosteos().size(), 3);
 	}
 	
 	@Test
@@ -42,22 +38,24 @@ class TestUsuario {
 		usu1.reTweetear(t2);
 		usu1.reTweetear(t3);
 		
-		assertEquals(usu1.getTweets().size(), 3);
+		assertEquals(usu1.getPosteos().size(), 3);
 	}
 	
 	@Test
-	void testBorradoEnCascada() {
-		usu1.reTweetear(t1);
-		usu1.reTweetear(t2);
-		usu1.reTweetear(t3);
-		usu1.Tweetear("esto es un tweet escrito 1");
-		usu1.Tweetear("esto es un tweet escrito 2");
-		usu1.Tweetear("esto es un tweet escrito 3");
+	void testConocePosteo() {
+		usu1.tweetear(t1);
+		assertTrue(usu1.conocePosteo(t1));
+	}
+	
+	@Test
+	void testBorrarTweets() {
+		usu1.tweetear(t1);
 		
-		assertEquals(usu1.getTweets().size(), 6);
+		assertEquals(usu1.getPosteos().size(), 1);
 		
-		usu1.borradoEnCascadaDeTweets();
+		usu1.borrarTweetsDe(usu1);
 		
-		assertTrue(usu1.getTweets().isEmpty());
+		assertEquals(usu1.getPosteos().size(), 0);
+
 	}
 }

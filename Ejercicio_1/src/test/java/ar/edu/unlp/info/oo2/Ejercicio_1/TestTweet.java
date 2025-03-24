@@ -8,31 +8,36 @@ import org.junit.jupiter.api.Test;
 class TestTweet {
 
 	Tweet t;
-	Tweet rt;
+	ReTweet rt;
+	Usuario u;
 	
 	@BeforeEach
 	void setUp(){
+		u = new Usuario("pepe");
 		t = new Tweet();
-		rt = new Tweet(t);
+		rt = new ReTweet(t);
 	}
 	
 	@Test
 	void testEscribirTweet() {
-		assertTrue(t.escribirTweet("Texto Ejemplo"));
-
-		assertFalse(t.escribirTweet(""));
+		t.escribirTweet("");
+		assertNull(t.getMensaje());
 		
-		assertFalse(t.escribirTweet(null));
+		t.escribirTweet("El desarrollo de software requiere planificación, diseño, implementación y pruebas. Es clave seguir buenas prácticas, como escribir código limpio y reutilizable. Además, el trabajo en equipo y la comunicación efectiva son esenciales para lograr proyectos exitosos y mantener la calidad del software.");
+		assertNull(t.getMensaje());
 		
-		assertFalse(t.escribirTweet("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate."));
-		
-		assertFalse(rt.escribirTweet(""));
-		
-		assertFalse(rt.escribirTweet("Texto Ejemplo"));
-		
-		assertFalse(rt.escribirTweet("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate."));
+		t.escribirTweet("Prueba de tweet");
+		assertEquals("Prueba de tweet", t.getMensaje());
 	}
 	
+	@Test
+	void testCrearReTweet() {
+		assertEquals(t, rt.getOrigen());
+	}
 	
-
+	@Test
+	void testConoceUsuario() {
+		u.tweetear(t);
+		assertTrue(rt.conoceUsuario(u));
+	}
 }

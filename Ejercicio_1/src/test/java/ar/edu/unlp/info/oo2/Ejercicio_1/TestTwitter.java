@@ -13,12 +13,24 @@ class TestTwitter {
 	Usuario usu1;
 	Usuario usu2;
 	Usuario usu3;
-	
-	
+	Tweet t1;
+	Tweet t2;
+	Tweet t3;
+	Usuario u1;
+	Usuario u2;
+	Usuario u3;
+	Usuario u4;
 	
 	@BeforeEach
 	void setUp(){
 		twi = new Twitter();
+		t1 = new Tweet();
+		t2 = new Tweet();
+		t3 = new Tweet();
+		u1 = new Usuario("usu1");
+		u2 = new Usuario("usu2");
+		u3 = new Usuario("usu3");
+		u4 = new Usuario("usu4");
 	}
 	
 	@Test
@@ -45,7 +57,7 @@ class TestTwitter {
 		
 		ArrayList<Usuario> usuarios = twi.getUsuarios();
 		
-		assertTrue (usuarios.isEmpty());
+		assertTrue(usuarios.isEmpty());
 	}
 	
 	@Test
@@ -55,5 +67,21 @@ class TestTwitter {
 		
 		assertEquals(twi.getUsuarios().size(), 1);
 	}
-
+	
+	@Test
+	void testBajaEnCascada() {
+		twi.altaUsuario(u1);
+		twi.altaUsuario(u2);
+		twi.altaUsuario(u3);
+		twi.altaUsuario(u4);
+		
+		u1.tweetear(t1);
+		u2.reTweetear(t1);
+		
+		twi.bajaUsuario(u1);
+		
+		assertEquals(twi.getUsuarios().size(), 3);
+		
+		assertTrue(u2.getPosteos().isEmpty());
+	}
 }
