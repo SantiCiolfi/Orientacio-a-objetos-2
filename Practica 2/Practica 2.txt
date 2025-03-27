@@ -55,6 +55,8 @@ private double calcularTotalSalarios() {
     return personal.stream().mapToDouble(personal -> personal.getSalario()).sum();
 }
 
+// HACER TODOS LOS EJERCICIOS MAS METODICOS, explicar e paso a paso nombrando los refactoring que aplique, empezando por los malos olores y una vez reconocido el mal olor poner el paso a paso para solucionarlo, no hacer un cambio masivo de golpe
+
 Ejercicio 2.1:
 i)	Atributos publicos, se cambian por atributos privados
 
@@ -152,11 +154,19 @@ public class PostApp{
 	* Retorna los últimos N posts que no pertenecen al usuario user
 	*/
 	public List<Post> ultimosPosts(Usuario user, int cantidad) {
-		List<Post> postsFiltrados = this.posts.stream
-			.filter(post -> !post.conoceUsuario(user)) //elimina a todos los posts que conocen al usuario
-			.sorted((post1, post2) -> post2.getFecha().copareTo(post1.getFecha())) //Ordena los posts por fecha en orden descendente (de más reciente a más antiguo). //Como post2 está primero, se invierte el orden normal (ascendente) y se obtiene orden descendente.
-			.limit(cantidad) //trunca la lista a la cantidad establecida
-			.collect(Collectors.toList()); //Convierte el Stream<Post> nuevamente en una List<Post>.
+		return limitarLista(ordenarPorfecha(filtrarUsuarios(user)), cantidad);
+	}
+
+	public List<Post> filtrarUsuarios(Usuario user){
+		return this.posts.stream.filter(post -> !post.conoceUsuario(user).collect(Collectors.toList()); //elimina a todos los posts que conocen al usuario
+	}
+	
+	public List<Post> ordenarPorFecha(List<Post> lista){
+		return lista.stream.sorted((post1, post2) -> post2.getFecha().copareTo(post1.getFecha())).collect(Collectors.toList()); //Ordena los posts por fecha en orden descendente (de más reciente a más antiguo). //Como post2 está primero, se invierte el orden normal (ascendente) y se obtiene orden descendente.
+	}
+
+	public List<Post> limitarLista(List<Post> lista, int cantidad){
+		return lista.limit(cantidad).collect(Collectors.toList()); //trunca la lista a la cantidad establecida
 	}
 }
 
